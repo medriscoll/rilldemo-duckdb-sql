@@ -1,0 +1,45 @@
+# Visit https://docs.rilldata.com/references/project-files to learn more about Rill project files.
+
+display_name: "eCommerce Store KPIs"
+model: "events_electronics_store_model"
+default_time_range: "P4W"
+smallest_time_grain: ""
+timeseries: "event_time"
+measures:
+  - label: "Total revenue"
+    expression: "SUM(price)"
+    description: "Revenue"
+    format_preset: currency_usd
+  - label: "Unique users"
+    expression: "COUNT(DISTINCT(user_id))"
+    description: "Unique users"
+    format_preset: humanize
+  - label: "Avg revenue per user"
+    expression: "SUM(price)/COUNT(DISTINCT(user_id))"
+    description: "Average revenue per user"
+    format_preset: currency_usd
+  - label: "Total purchases"
+    expression: "SUM(CASE WHEN (event_type == 'purchase') THEN 1 ELSE 0 END)"
+    description: "Total count of purchases"
+    format_preset: humanize
+  - label: "Total carts"
+    expression: "SUM(CASE WHEN (event_type == 'cart') THEN 1 ELSE 0 END)"
+    description: "Total count of shopping carts created"
+    format_preset: humanize
+  - label: "Total views"
+    expression: "SUM(CASE WHEN (event_type == 'view') THEN 1 ELSE 0 END)"
+    description: "Total count of product views"
+    format_preset: humanize
+  - label: "Cart conversion rate"
+    expression: "CAST( SUM(CASE WHEN (event_type == 'purchase') THEN 1 ELSE 0 END)
+      as float) /   CAST( SUM(CASE WHEN (event_type == 'view') THEN 1 ELSE 0
+      END) as float)"
+    description: "Conversion rate from view to purchase"
+    format_preset: percentage
+dimensions:
+  - label: Category_code
+    property: category_code
+    description: ""
+  - label: Brand
+    property: brand
+    description: ""
