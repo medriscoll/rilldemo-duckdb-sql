@@ -20,4 +20,5 @@ rill start https://github.com/medriscoll/rilldemo-duckdb-sql.git
 
 Rill will rehydrate the data sources and then launch in a new browser window. 
 
+![Alt text](rilldemo-duckdb-sql.png)
 
